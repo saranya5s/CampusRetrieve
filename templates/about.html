@@ -1,0 +1,289 @@
+{% extends "layout.html" %}
+
+{% block title %}About - CampusRetrieve{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <i class="bi bi-info-circle-fill" style="font-size: 4rem; color: #3498db;"></i>
+                <h1 class="mt-3">About CampusRetrieve</h1>
+                <p class="lead text-muted">A centralized Lost & Found Hub for educational institutions</p>
+            </div>
+
+            <!-- Abstract -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="bi bi-file-text"></i> Abstract</h3>
+                    <p class="card-text">
+                        CampusRetrieve is a web-based repository designed to solve the inefficiency of manual 
+                        "Lost and Found" processes in educational institutions. Currently, lost items are reported 
+                        via scattered WhatsApp groups or physical notice boards, leading to low recovery rates. 
+                        This project provides a centralized digital platform where students can post details about 
+                        items they have lost or found.
+                    </p>
+                    <p class="card-text">
+                        The system utilizes a <strong>Model-View-Controller (MVC)</strong> architecture and features 
+                        <strong>File Handling</strong> (for image uploads), <strong>Search Algorithms</strong> (for 
+                        item filtering), and <strong>Database Persistence</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="bi bi-star-fill"></i> Key Features</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h5><i class="bi bi-camera text-primary"></i> Photo Uploads</h5>
+                            <p>Users can upload actual photos of "Found" items for visual verification.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h5><i class="bi bi-funnel text-success"></i> Categorized Filtering</h5>
+                            <p>Items are tagged (Electronics, Books, ID Cards, Keys) for quick searching.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h5><i class="bi bi-check-circle text-success"></i> Status Tracking</h5>
+                            <p>Items are clearly marked as "LOST" (Red) or "FOUND" (Green).</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h5><i class="bi bi-envelope text-info"></i> One-Click Contact</h5>
+                            <p>A "Contact" button immediately opens an email draft to the reporter.</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h5><i class="bi bi-phone text-warning"></i> Responsive Design</h5>
+                            <p>Works perfectly on mobile phones (crucial for students on campus).</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h5><i class="bi bi-search text-primary"></i> Advanced Search</h5>
+                            <p>Filter by status, category, and search keywords instantly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advantages & Disadvantages -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card h-100 border-success">
+                        <div class="card-body">
+                            <h3 class="card-title text-success">
+                                <i class="bi bi-check-circle"></i> Advantages
+                            </h3>
+                            <ul>
+                                <li><strong>Centralization:</strong> Eliminates the need to check multiple physical locations</li>
+                                <li><strong>Visual Proof:</strong> Images reduce confusion between similar items</li>
+                                <li><strong>Speed:</strong> Real-time updates for immediate claiming</li>
+                                <li><strong>Accessibility:</strong> 24/7 access from any device</li>
+                                <li><strong>Organized:</strong> Categorized and searchable database</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 border-warning">
+                        <div class="card-body">
+                            <h3 class="card-title text-warning">
+                                <i class="bi bi-exclamation-triangle"></i> Limitations
+                            </h3>
+                            <ul>
+                                <li><strong>Trust Dependence:</strong> System relies on user honesty</li>
+                                <li><strong>Privacy:</strong> Contact details are visible to users</li>
+                                <li><strong>Maintenance:</strong> Old items need manual deletion</li>
+                                <li><strong>Internet Required:</strong> Requires online connectivity</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Modules -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="bi bi-gear-fill"></i> System Architecture (6 Modules)</h3>
+                    
+                    <div class="accordion" id="modulesAccordion">
+                        <!-- Module 1 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#module1">
+                                    1. User Interface (UI) & Experience Module
+                                </button>
+                            </h2>
+                            <div id="module1" class="accordion-collapse collapse show" data-bs-parent="#modulesAccordion">
+                                <div class="accordion-body">
+                                    <strong>Function:</strong> Presentation layer handling what users see and interact with.
+                                    <br><strong>Components:</strong> HTML templates, CSS styling, Bootstrap 5, responsive navigation
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 2 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#module2">
+                                    2. Item Reporting & Data Validation Module
+                                </button>
+                            </h2>
+                            <div id="module2" class="accordion-collapse collapse" data-bs-parent="#modulesAccordion">
+                                <div class="accordion-body">
+                                    <strong>Function:</strong> Input gateway managing data entry into the system.
+                                    <br><strong>Components:</strong> Form validation, POST request handling, input sanitization
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 3 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#module3">
+                                    3. Media & File Management Module
+                                </button>
+                            </h2>
+                            <div id="module3" class="accordion-collapse collapse" data-bs-parent="#modulesAccordion">
+                                <div class="accordion-body">
+                                    <strong>Function:</strong> Specialized security & storage for image uploads.
+                                    <br><strong>Components:</strong> File validation, secure filename handling, timestamp generation, file system I/O
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 4 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#module4">
+                                    4. Search & Retrieval Engine Module
+                                </button>
+                            </h2>
+                            <div id="module4" class="accordion-collapse collapse" data-bs-parent="#modulesAccordion">
+                                <div class="accordion-body">
+                                    <strong>Function:</strong> Logic core for filtering and finding specific items.
+                                    <br><strong>Components:</strong> Query logic, filtering algorithms, sorting by date
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 5 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#module5">
+                                    5. Communication & Interaction Module
+                                </button>
+                            </h2>
+                            <div id="module5" class="accordion-collapse collapse" data-bs-parent="#modulesAccordion">
+                                <div class="accordion-body">
+                                    <strong>Function:</strong> Manages user-to-user connections.
+                                    <br><strong>Components:</strong> MailTo protocol integration, dynamic email generation
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module 6 -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#module6">
+                                    6. Database Persistence & ORM Module
+                                </button>
+                            </h2>
+                            <div id="module6" class="accordion-collapse collapse" data-bs-parent="#modulesAccordion">
+                                <div class="accordion-body">
+                                    <strong>Function:</strong> Data layer for long-term information storage.
+                                    <br><strong>Components:</strong> SQLite database, SQLAlchemy ORM, schema management
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Stack -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="bi bi-code-square"></i> Technical Stack</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Frontend</h5>
+                            <ul>
+                                <li>HTML5</li>
+                                <li>CSS3</li>
+                                <li>JavaScript</li>
+                                <li>Bootstrap 5</li>
+                                <li>Bootstrap Icons</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Backend</h5>
+                            <ul>
+                                <li>Python 3.x</li>
+                                <li>Flask Framework</li>
+                                <li>SQLAlchemy ORM</li>
+                                <li>SQLite Database</li>
+                                <li>Werkzeug (File Security)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Usage Scenarios -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title"><i class="bi bi-lightbulb"></i> Usage Scenarios</h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="card bg-light h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Scenario 1: Lost Wallet</h5>
+                                    <p class="card-text small">
+                                        Student A loses a wallet. They post a "LOST" report with description. 
+                                        Student B finds it, searches the portal, and emails Student A.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card bg-light h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Scenario 2: Found Keys</h5>
+                                    <p class="card-text small">
+                                        Student C finds keys and posts a "FOUND" report with photo. 
+                                        The owner sees the photo and immediately claims them.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card bg-light h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Scenario 3: Lost Phone</h5>
+                                    <p class="card-text small">
+                                        Student D loses phone in cafeteria. Posts details. 
+                                        Later that day, someone reports finding it with matching description.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-5">
+                <h3>Ready to Get Started?</h3>
+                <p class="text-muted">Help build a more connected campus community</p>
+                <div class="d-flex gap-3 justify-content-center">
+                    <a href="{{ url_for('report') }}" class="btn btn-primary btn-lg">
+                        <i class="bi bi-plus-circle"></i> Report an Item
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="bi bi-search"></i> Browse Items
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

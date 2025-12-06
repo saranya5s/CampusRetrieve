@@ -1,0 +1,167 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section text-center">
+    <div class="container">
+        <h1 class="display-4 mb-3">
+            <i class="bi bi-search"></i> Lost Something? Found Something?
+        </h1>
+        <p class="lead mb-4">
+            Your centralized hub for campus lost and found items. Report, search, and recover items quickly!
+        </p>
+        <a href="{{ url_for('report') }}" class="btn btn-light btn-lg">
+            <i class="bi bi-plus-circle"></i> Report an Item
+        </a>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <h4 class="mb-3"><i class="bi bi-funnel"></i> Filter & Search</h4>
+        <form method="GET" action="{{ url_for('index') }}" class="row g-3">
+            <!-- Search Bar -->
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="search" 
+                       placeholder="Search items..." value="{{ search_query }}">
+            </div>
+            
+            <!-- Status Filter -->
+            <div class="col-md-3">
+                <select class="form-select" name="status">
+                    <option value="">All Status</option>
+                    <option value="LOST" {% if status_filter == 'LOST' %}selected{% endif %}>Lost</option>
+                    <option value="FOUND" {% if status_filter == 'FOUND' %}selected{% endif %}>Found</option>
+                </select>
+            </div>
+            
+            <!-- Category Filter -->
+            <div class="col-md-3">
+                <select class="form-select" name="category">
+                    <option value="">All Categories</option>
+                    <option value="Electronics" {% if category_filter == 'Electronics' %}selected{% endif %}>Electronics</option>
+                    <option value="Books" {% if category_filter == 'Books' %}selected{% endif %}>Books</option>
+                    <option value="ID Cards" {% if category_filter == 'ID Cards' %}selected{% endif %}>ID Cards</option>
+                    <option value="Keys" {% if category_filter == 'Keys' %}selected{% endif %}>Keys</option>
+                    <option value="Clothing" {% if category_filter == 'Clothing' %}selected{% endif %}>Clothing</option>
+                    <option value="Bags" {% if category_filter == 'Bags' %}selected{% endif %}>Bags</option>
+                    <option value="Other" {% if category_filter == 'Other' %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+            
+            <!-- Submit Button -->
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    <i class="bi bi-search"></i> Filter
+                </button>
+            </div>
+        </form>
+        
+        <!-- Clear Filters -->
+        {% if status_filter or category_filter or search_query %}
+        <div class="mt-2">
+            <a href="{{ url_for('index') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-x-circle"></i> Clear Filters
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Statistics -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle"></i> 
+                <strong>{{ items|length }}</strong> items found
+                {% if status_filter or category_filter or search_query %}
+                    with current filters
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Items Grid -->
+    {% if items %}
+    <div class="row">
+        {% for item in items %}
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card h-100">
+                <!-- Image -->
+                {% if item.image_filename %}
+                <img src="{{ url_for('static', filename='uploads/' + item.image_filename) }}" 
+                     class="card-img-top item-image" alt="{{ item.title }}">
+                {% else %}
+                <div class="card-img-top item-image bg-secondary d-flex align-items-center justify-content-center">
+                    <i class="bi bi-image text-white" style="font-size: 3rem;"></i>
+                </div>
+                {% endif %}
+                
+                <!-- Card Body -->
+                <div class="card-body">
+                    <!-- Status Badge -->
+                    {% if item.status == 'LOST' %}
+                    <span class="badge badge-lost mb-2">
+                        <i class="bi bi-exclamation-triangle"></i> LOST
+                    </span>
+                    {% else %}
+                    <span class="badge badge-found mb-2">
+                        <i class="bi bi-check-circle"></i> FOUND
+                    </span>
+                    {% endif %}
+                    
+                    <!-- Category Badge -->
+                    <span class="badge bg-secondary category-badge mb-2">
+                        {{ item.category }}
+                    </span>
+                    
+                    <!-- Title -->
+                    <h5 class="card-title mt-2">{{ item.title }}</h5>
+                    
+                    <!-- Description (truncated) -->
+                    <p class="card-text text-muted small">
+                        {{ item.description[:80] }}{% if item.description|length > 80 %}...{% endif %}
+                    </p>
+                    
+                    <!-- Location -->
+                    <p class="card-text">
+                        <i class="bi bi-geo-alt"></i> <strong>{{ item.location }}</strong>
+                    </p>
+                    
+                    <!-- Date -->
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <i class="bi bi-calendar"></i> {{ item.date_posted.strftime('%b %d, %Y') }}
+                        </small>
+                    </p>
+                </div>
+                
+                <!-- Card Footer -->
+                <div class="card-footer bg-white border-0">
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('item_detail', id=item.id) }}" class="btn btn-primary btn-sm">
+                            <i class="bi bi-eye"></i> View Details
+                        </a>
+                        <a href="mailto:{{ item.contact_email }}?subject=Regarding {{ item.status }}: {{ item.title }}" 
+                           class="btn btn-success btn-sm">
+                            <i class="bi bi-envelope"></i> Contact
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <!-- No Items Found -->
+    <div class="text-center py-5">
+        <i class="bi bi-inbox" style="font-size: 5rem; color: #ccc;"></i>
+        <h3 class="mt-3 text-muted">No Items Found</h3>
+        <p class="text-muted">Try adjusting your filters or be the first to report an item!</p>
+        <a href="{{ url_for('report') }}" class="btn btn-primary mt-3">
+            <i class="bi bi-plus-circle"></i> Report an Item
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
